@@ -1,0 +1,43 @@
+worker_processes 1;
+events { worker_connections 1024; }
+
+http {
+    sendfile on;
+    client_max_body_size 20m;
+
+    server {
+        listen ${PORT};
+
+        # ترافیک واقعی VPN (VLESS روی WebSocket) — مستقیم به Xray لوکال پاس داده می‌شه.
+        # مسیر واقعی تصادفی و مخفیه (توی start.sh ساخته می‌شه)، نه یه چیز ثابت و قابل‌حدس.
+        location ${VLESS_WS_PATH} {
+            proxy_pass http://127.0.0.1:10000;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_set_header Host $host;
+            proxy_read_timeout 300s;
+        }
+
+        # مسیر قدیمیِ ثابت "/vless-ws": فقط برای اینکه کانفیگ‌هایی که قبل از این
+        # تغییر به کاربرها داده شده بودن همچنان کار کنن. درخواست‌هایی که به این
+        # مسیر می‌رسن، به همون مسیر مخفیِ بالا پاس داده می‌شن؛ هیچ کانفیگ جدیدی
+        # دیگه از این مسیر استفاده نمی‌کنه.
+        location = /vless-ws {
+            proxy_pass http://127.0.0.1:10000${VLESS_WS_PATH};
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_set_header Host $host;
+            proxy_read_timeout 300s;
+        }
+
+        # بقیه‌ی همه چیز (پنل، API) می‌ره سمت FastAPI
+        location / {
+            proxy_pass http://127.0.0.1:8000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    }
+}

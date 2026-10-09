@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>__BRAND__ — کانفیگ شما</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A1F; --panel:#161230; --panel-2:#1C1740; --border:#2E2560; --text:#ECEAFB; --text-dim:#A79FD6;
+    --text-faint:#6B62A0; --accent:#6C5CE7; --violet:#4F8BFF; --accent-soft:rgba(108,92,231,.16); --ok:#3FD08C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{
+    background:var(--bg); color:var(--text); font-family:'Vazirmatn',sans-serif; min-height:100vh;
+    display:flex; align-items:center; justify-content:center; padding:28px 16px;
+    background-image: radial-gradient(circle at 15% 10%, rgba(108,92,231,.18), transparent 30%),
+                       radial-gradient(circle at 85% 15%, rgba(79,139,255,.12), transparent 28%);
+  }
+  .mono{font-family:'JetBrains Mono',monospace; direction:ltr; unicode-bidi:embed;}
+  .card{
+    width:100%; max-width:380px; background:var(--panel); border:1px solid var(--border);
+    border-radius:20px; padding:26px 22px; box-shadow:0 25px 70px rgba(0,0,0,.35);
+  }
+  .brand{display:flex; align-items:center; justify-content:center; gap:9px; margin-bottom:18px;}
+  .brand-mark{width:34px; height:34px; border-radius:10px; background:linear-gradient(135deg,var(--accent),var(--violet));
+    display:flex; align-items:center; justify-content:center;}
+  .brand-mark svg{width:18px; height:18px;}
+  .brand-name{font-weight:800; font-size:17px;}
+
+  h1{font-size:14.5px; text-align:center; color:var(--text-dim); font-weight:600; margin-bottom:4px;}
+  .username{text-align:center; font-weight:800; font-size:17px; margin-bottom:18px;}
+
+  .qr-box{background:#fff; border-radius:16px; padding:14px; display:flex; align-items:center; justify-content:center; margin-bottom:18px;}
+  .qr-box img{display:block; width:100%; height:auto; max-width:220px;}
+
+  .link-row{display:flex; align-items:center; gap:8px; background:var(--panel-2); border:1px solid var(--border);
+    border-radius:11px; padding:11px 13px; margin-bottom:10px;}
+  .link-row .mono{flex:1; font-size:11px; color:var(--accent); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .copy-btn{background:var(--accent-soft); color:var(--accent); border:1px solid var(--accent); padding:7px 13px;
+    border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; flex-shrink:0; font-family:inherit;}
+  .copy-btn.copied{background:rgba(63,208,140,.15); color:var(--ok); border-color:var(--ok);}
+
+  .stats{display:flex; gap:10px; margin-bottom:20px;}
+  .stat{flex:1; background:var(--panel-2); border:1px solid var(--border); border-radius:11px; padding:10px; text-align:center;}
+  .stat b{display:block; font-size:13px;}
+  .stat span{font-size:10.5px; color:var(--text-faint);}
+
+  .section-label{font-size:11px; color:var(--text-faint); font-weight:700; margin:16px 0 8px; text-align:center;}
+  .apps{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:6px;}
+  .app-chip{font-size:11px; background:var(--panel-2); border:1px solid var(--border); border-radius:20px; padding:6px 13px; color:var(--text-dim);}
+
+  .channels{display:flex; flex-direction:column; gap:8px;}
+  .channel-btn{
+    display:flex; align-items:center; justify-content:center; gap:8px; text-decoration:none;
+    background:linear-gradient(135deg, rgba(108,92,231,.18), rgba(79,139,255,.14));
+    border:1px solid var(--border); color:var(--text); padding:11px; border-radius:11px;
+    font-size:13px; font-weight:700;
+  }
+  .channel-btn svg{width:16px; height:16px; flex-shrink:0;}
+  .channel-btn.support{background:linear-gradient(135deg, var(--accent), var(--violet)); border-color:transparent; color:#fff;}
+  .foot{text-align:center; font-size:11px; color:var(--text-faint); margin-top:16px;}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M3 13L11 3V10H21L13 21V14H3Z" fill="#04101F"/></svg></div>
+      <div class="brand-name">__BRAND__</div>
+    </div>
+
+    <h1>کانفیگ اختصاصی</h1>
+    <div class="username">__USERNAME__</div>
+
+    <div class="qr-box"><img id="qr" src="__QR_DATA_URI__" alt="QR کانفیگ" /></div>
+
+    <div class="link-row">
+      <span class="mono" id="linkText">__VLESS_LINK__</span>
+      <button class="copy-btn" id="copyBtn" onclick="copyLink()">کپی</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>__DATA_LIMIT__</b><span>حجم</span></div>
+      <div class="stat"><b>__EXPIRE__</b><span>انقضا</span></div>
+    </div>
+
+    <div class="section-label">با این اپ‌ها وصل شو</div>
+    <div class="apps">
+      <span class="app-chip">v2rayNG</span>
+      <span class="app-chip">Hiddify</span>
+      <span class="app-chip">Streisand</span>
+      <span class="app-chip">Shadowrocket</span>
+    </div>
+
+    <div class="section-label">پشتیبانی</div>
+    <div class="channels">
+      <a class="channel-btn support" href="https://t.me/Config_v2rey_ir" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6c.3-1-.7-1.9-1.6-1.5L2.4 10.6c-1 .4-1 1.9.1 2.2l4.4 1.4 1.7 5.4c.3.9 1.4 1.1 2 .4l2.5-2.7 4.6 3.4c.8.6 2 .2 2.2-.8l3-14.3Z"/></svg>
+        پشتیبانی تلگرام
+      </a>
+    </div>
+
+    <div class="section-label">کانال‌های ما</div>
+    <div class="channels">
+      <a class="channel-btn" href="https://t.me/banl_Wireguard" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6c.3-1-.7-1.9-1.6-1.5L2.4 10.6c-1 .4-1 1.9.1 2.2l4.4 1.4 1.7 5.4c.3.9 1.4 1.1 2 .4l2.5-2.7 4.6 3.4c.8.6 2 .2 2.2-.8l3-14.3Z"/></svg>
+        کانال وایرگارد
+      </a>
+      <a class="channel-btn" href="https://t.me/Amin_Net1" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6c.3-1-.7-1.9-1.6-1.5L2.4 10.6c-1 .4-1 1.9.1 2.2l4.4 1.4 1.7 5.4c.3.9 1.4 1.1 2 .4l2.5-2.7 4.6 3.4c.8.6 2 .2 2.2-.8l3-14.3Z"/></svg>
+        کانال Amin Net
+      </a>
+    </div>
+
+    <div class="foot">این لینک شخصی توئه — با کسی به اشتراک نذار</div>
+  </div>
+
+  <script>
+    const link = document.getElementById('linkText').textContent;
+    // کیوآر کد دیگه با جاوااسکریپت و از روی یه سرور خارجی (CDN) ساخته نمی‌شه،
+    // چون خیلی از کاربرها قبل از وصل‌شدن به VPN اصلاً نمی‌تونن اون سرور رو باز
+    // کنن و در نتیجه کیوآر کد اصلاً نشون داده نمی‌شد. الان کیوآر کد از قبل توی
+    // خودِ سرور ما ساخته شده و مستقیم توی تگ img بالا (عکس base64) قرار داره.
+
+    function copyLink() {
+      const btn = document.getElementById('copyBtn');
+      const finish = () => { btn.textContent = 'کپی شد'; btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'کپی'; btn.classList.remove('copied'); }, 1500); };
+      if (navigator.clipboard) { navigator.clipboard.writeText(link).then(finish).catch(finish); }
+      else { finish(); }
+    }
+  </script>
+</body>
+</html>
