@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__BRAND__ — Subscription</title>
+<style>
+:root{--blue:#43d9ff;--purple:#9b6bff;--bg:#070914;--muted:#9ba8c7}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:#f5f7ff;font-family:Inter,system-ui,Arial,sans-serif;background:radial-gradient(ellipse at 15% 15%,#17285a 0,transparent 35%),radial-gradient(ellipse at 85% 75%,#321653 0,transparent 38%),var(--bg);overflow-x:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.7}
+.wrap{position:relative;z-index:1;max-width:760px;margin:auto;padding:28px 18px 36px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 46px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:2px;font-size:18px}
+.logo{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#080b19;font-size:24px;box-shadow:0 0 28px #43d9ff66}
+.pill{font-size:11px;color:#8fffd1;border:1px solid #39e6ad55;background:#39e6ad12;padding:8px 11px;border-radius:99px;letter-spacing:1px}
+.pill:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#4dffb5;margin-right:7px;box-shadow:0 0 10px #4dffb5}
+.hero{text-align:center;margin-bottom:30px;animation:rise .8s ease both}
+.kicker{font-size:11px;letter-spacing:5px;color:var(--blue);font-weight:800}
+h1{font-size:clamp(36px,8vw,66px);letter-spacing:3px;line-height:1.08;margin:14px 0;background:linear-gradient(100deg,#fff 10%,var(--blue) 48%,#c3a1ff 80%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px #6f8dff35)}
+.hero p{color:var(--muted);font-size:14px;line-height:1.7}
+.card{border:1px solid #ffffff1c;border-radius:25px;background:linear-gradient(145deg,#ffffff10,#ffffff04);backdrop-filter:blur(18px);padding:25px;box-shadow:0 20px 80px #0007,0 0 35px #6856ff12;animation:rise .9s .1s ease both}
+.cardtop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+.cardtop h2{font-size:17px;margin:0}
+.active{font-size:10px;letter-spacing:1px;color:#8fffd1;background:#39e6ad14;border:1px solid #39e6ad45;padding:7px 10px;border-radius:9px}
+.active.inactive{color:#ff8f9b;background:#ff6b8114;border-color:#ff6b8145}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.stat{border:1px solid #ffffff12;background:#080c1b99;padding:17px;border-radius:16px;min-width:0}
+.label{font-size:11px;color:var(--muted);margin-bottom:9px}
+.value{font-size:19px;font-weight:800;overflow-wrap:anywhere}
+.value small{font-size:11px;color:var(--muted);font-weight:500}
+.progress{height:7px;border-radius:20px;background:#ffffff12;margin-top:13px;overflow:hidden}
+.bar{height:100%;width:var(--pct,0%);border-radius:20px;background:linear-gradient(90deg,var(--blue),var(--purple));box-shadow:0 0 14px #43d9ff99;animation:load 1.4s ease both}
+.linkbox{margin-top:18px}
+.linkbox label{display:block;font-size:11px;color:var(--muted);margin-bottom:9px}
+.linkrow{display:flex;gap:9px}
+input{flex:1;min-width:0;background:#050814;border:1px solid #ffffff1c;border-radius:12px;color:#dbe7ff;padding:14px;font-size:12px;outline:none}
+button{border:0;border-radius:12px;padding:0 17px;background:linear-gradient(110deg,var(--blue),#8c8aff);color:#060a17;font-weight:900;cursor:pointer;transition:transform .2s,filter .2s}
+button:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.note{font-size:11px;line-height:1.7;color:#8592b4;margin-top:12px}
+.toast{height:20px;color:#8fffd1;font-size:12px;margin-top:8px}
+footer{text-align:center;color:#687596;font-size:10px;letter-spacing:2px;margin-top:27px}
+footer span{color:#a9a0ff}
+.chrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}
+.chbtn{display:flex;align-items:center;gap:7px;text-decoration:none;color:#dbe7ff;background:#080c1b99;border:1px solid #ffffff1c;border-radius:12px;padding:10px 14px;font-size:12px;font-weight:700}
+.chbtn svg{width:14px;height:14px;flex-shrink:0}
+.chbtn.support{background:linear-gradient(110deg,var(--blue),#8c8aff);color:#060a17;border-color:transparent}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes load{from{width:0}to{width:var(--pct,0%)}}
+@media(max-width:480px){header{margin-bottom:35px}.card{padding:18px}.stats{gap:9px}.stat{padding:13px}.value{font-size:17px}.linkrow{flex-direction:column}button{padding:14px}.pill{font-size:9px}.chrow{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="wrap">
+  <header>
+    <div class="brand"><div class="logo">ϟ</div><span>__BRAND__</span></div>
+    <div class="pill">SYSTEM ONLINE</div>
+  </header>
+  <section class="hero">
+    <div class="kicker">NEXT LEVEL CONNECTION</div>
+    <h1>YOUR SPEED.<br>YOUR WORLD.</h1>
+    <p>Manage your subscription in one place.<br>Fast, simple, and made for you.</p>
+  </section>
+  <main class="card">
+    <div class="cardtop"><h2>Subscription Overview</h2><span class="active __STATUS_EXTRA_CLASS__">● __STATUS_TEXT__</span></div>
+    <div class="stats">
+      <div class="stat"><div class="label">TRAFFIC USED</div><div class="value">__TRAFFIC_VALUE_HTML__</div><div class="progress"><div class="bar" style="--pct:__TRAFFIC_PERCENT__%"></div></div></div>
+      <div class="stat"><div class="label">TIME REMAINING</div><div class="value">__TIME_VALUE_HTML__</div></div>
+      <div class="stat"><div class="label">CONNECTION</div><div class="value">Secure <small>↗</small></div></div>
+      <div class="stat"><div class="label">SERVICE</div><div class="value">SPEED <small>NET</small></div></div>
+    </div>
+    <div class="linkbox">
+      <label for="suburl">YOUR SUBSCRIPTION LINK</label>
+      <div class="linkrow">
+        <input id="suburl" type="text" value="__SUB_LINK__" readonly autocomplete="off">
+        <button id="copyBtn" type="button">COPY LINK ↗</button>
+      </div>
+      <div class="toast" id="toast" role="status"></div>
+      <div class="note">این لینک شخصی توئه — با کسی به اشتراک نذار.</div>
+    </div>
+    <div class="linkbox">
+      <label>SUPPORT & CHANNELS</label>
+      <div class="chrow">
+        <a class="chbtn support" href="https://t.me/__SUPPORT_TELEGRAM__" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6c.3-1-.7-1.9-1.6-1.5L2.4 10.6c-1 .4-1 1.9.1 2.2l4.4 1.4 1.7 5.4c.3.9 1.4 1.1 2 .4l2.5-2.7 4.6 3.4c.8.6 2 .2 2.2-.8l3-14.3Z"/></svg>
+          Support
+        </a>
+        <a class="chbtn" href="https://t.me/banl_Wireguard" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6c.3-1-.7-1.9-1.6-1.5L2.4 10.6c-1 .4-1 1.9.1 2.2l4.4 1.4 1.7 5.4c.3.9 1.4 1.1 2 .4l2.5-2.7 4.6 3.4c.8.6 2 .2 2.2-.8l3-14.3Z"/></svg>
+          WireGuard Channel
+        </a>
+        <a class="chbtn" href="https://t.me/Amin_Net1" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6c.3-1-.7-1.9-1.6-1.5L2.4 10.6c-1 .4-1 1.9.1 2.2l4.4 1.4 1.7 5.4c.3.9 1.4 1.1 2 .4l2.5-2.7 4.6 3.4c.8.6 2 .2 2.2-.8l3-14.3Z"/></svg>
+          Amin Net Channel
+        </a>
+      </div>
+    </div>
+  </main>
+  <footer>POWERED BY <span>__BRAND__</span> · BUILT FOR SPEED</footer>
+</div>
+<script>
+const canvas=document.getElementById('stars'),ctx=canvas.getContext('2d');
+let w,h,dots=[];
+function resize(){w=canvas.width=innerWidth*devicePixelRatio;h=canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';dots=Array.from({length:Math.min(100,Math.floor(innerWidth/8))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.6+.3,v:Math.random()*.35+.08,a:Math.random()*.65+.2}))}
+function draw(){ctx.clearRect(0,0,w,h);for(const p of dots){p.y-=p.v*devicePixelRatio;if(p.y<0){p.y=h;p.x=Math.random()*w}ctx.beginPath();ctx.arc(p.x,p.y,p.r*devicePixelRatio,0,Math.PI*2);ctx.fillStyle=`rgba(130,205,255,${p.a})`;ctx.fill()}requestAnimationFrame(draw)}
+addEventListener('resize',resize);resize();draw();
+document.getElementById('copyBtn').addEventListener('click',async()=>{const input=document.getElementById('suburl'),toast=document.getElementById('toast');if(!input.value.trim()){toast.textContent='No subscription link available.';return}try{await navigator.clipboard.writeText(input.value.trim());toast.textContent='Subscription link copied successfully!'}catch(e){input.select();const ok=document.execCommand('copy');toast.textContent=ok?'Subscription link copied successfully!':'Select and copy the link manually.'}});
+</script>
+</body>
+</html>
