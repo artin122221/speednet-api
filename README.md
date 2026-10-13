@@ -47,7 +47,7 @@
 
 🔗 آدرس ورود به پنل:
 
-https://YOUR-DOMAIN/x7m2qp9z
+https://<دامنه‌ی پنلت>/sp-admin-7k2q9
 
 به‌جای "YOUR-DOMAIN"، دامنه واقعی پنل خود را قرار دهید.
 
