@@ -49,7 +49,7 @@
 
 https://<دامنه‌ی پنلت>/sp-admin-7k2q9
 
-به‌جای "YOUR-DOMAIN"، دامنه واقعی پنل خود را قرار دهید.
+به‌جای "دامنه ی پنلت"، دامنه واقعی پنل خود را قرار دهید.
 
 <div align="center"><img src="https://img.shields.io/badge/NETWORK-PUBLIC-00E5FF?style=for-the-badge" />
 <img src="https://img.shields.io/badge/PORT-8080-7C4DFF?style=for-the-badge" />
