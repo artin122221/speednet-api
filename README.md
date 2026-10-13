@@ -1,117 +1,167 @@
 ---
 
-<div align="center"><img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=800&size=24&duration=2000&pause=500&color=00E5FF&center=true&vCenter=true&width=700&height=55&lines=03+%E2%80%A2+PERSISTENT+STORAGE;04+%E2%80%A2+DOMAIN+GENERATOR;05+%E2%80%A2+PANEL+ACCESS;06+%E2%80%A2+CONFIGURATION;07+%E2%80%A2+READY+TO+CONNECT" alt="SPEED NET Setup Steps" />"⚡ INITIALIZE • CONFIGURE • CONNECT ⚡"
+<div align="center"><img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=170&color=0:050816,50:17104A,100:00E5FF&text=SPEED%20NET&fontColor=FFFFFF&fontSize=48&fontAlignY=40&desc=SYSTEM%20CONFIGURATION&descSize=15&descAlignY=62&animation=twinkling" alt="SPEED NET System Configuration" /><br><img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=800&size=20&duration=1800&pause=500&color=00E5FF&center=true&vCenter=true&width=650&height=45&lines=03+%E2%80%A2+PERSISTENT+STORAGE;04+%E2%80%A2+DOMAIN+GENERATOR;05+%E2%80%A2+ADMIN+ACCESS;06+%E2%80%A2+CREATE+CONFIG;07+%E2%80%A2+READY+TO+CONNECT" alt="Animated Setup Steps" /><br><img src="https://img.shields.io/badge/03-STORAGE-00E5FF?style=for-the-badge" />
+<img src="https://img.shields.io/badge/04-DOMAIN-7C4DFF?style=for-the-badge" />
+<img src="https://img.shields.io/badge/05-LOGIN-00E5FF?style=for-the-badge" />
+<img src="https://img.shields.io/badge/06-CONFIG-7C4DFF?style=for-the-badge" />
+<img src="https://img.shields.io/badge/07-LAUNCH-00E5FF?style=for-the-badge" /><br><br>
 
-"STEP 03" → "STEP 04" → "STEP 05" → "STEP 06" → "STEP 07"
+"⚡ INITIALIZE • CONFIGURE • CONNECT ⚡"
+
+راهنمای تکمیل راه‌اندازی پنل SPEED NET
 
 </div>---
 
-<img src="https://img.shields.io/badge/03-PERSISTENT%20STORAGE-00E5FF?style=for-the-badge" />
+<div align="center">"03" — PERSISTENT STORAGE
 
-💾 ساخت و اتصال Volume
+💾 ایجاد فضای ذخیره‌سازی دائمی
 
-برای حفظ اطلاعات پنل پس از Restart یا Deploy مجدد، مراحل زیر را انجام دهید:
+</div>برای اینکه اطلاعات پنل پس از Restart یا Deploy مجدد باقی بمانند، باید یک Volume ایجاد و به سرویس صحیح متصل کنید.
 
-1. وارد تنظیمات سرویس خود در Railway شوید.
-2. به بخش Volumes بروید.
-3. یک Volume جدید ایجاد کنید.
-4. مقدار زیر را به‌عنوان Mount Path قرار دهید:
+مراحل انجام کار:
+
+1. وارد پروژه خود در Railway شوید.
+2. سرویس اصلی پنل را انتخاب کنید.
+3. وارد بخش Volumes شوید.
+4. یک Volume جدید بسازید.
+5. مسیر زیر را دقیقاً به‌عنوان Mount Path وارد کنید:
 
 /app/data
 
-5. Volume را به سرویس اصلی پنل متصل کنید.
-6. در صورت نیاز، سرویس را مجدداً Deploy کنید.
+6. بررسی کنید Volume به همان سرویسی متصل شده باشد که پنل را اجرا می‌کند.
+7. اگر Railway برای اعمال تنظیمات نیاز به Deploy مجدد دارد، آن را انجام دهید.
+8. پس از بالا آمدن سرویس، لاگ‌ها را بررسی کنید تا خطای اتصال Volume وجود نداشته باشد.
 
-<div align="center"><img src="https://img.shields.io/badge/STORAGE-PERSISTENT-00E5FF?style=flat-square" />
-<img src="https://img.shields.io/badge/MOUNT%20PATH-/app/data-7C4DFF?style=flat-square" /></div>«💠 نکته: برنامه باید اطلاعاتی را که قرار است باقی بمانند، واقعاً در مسیر "/app/data" ذخیره کند. ساخت Volume به‌تنهایی محل ذخیره‌سازی برنامه را تغییر نمی‌دهد.»
+<div align="center"><img src="https://img.shields.io/badge/STORAGE-PERSISTENT-00E5FF?style=for-the-badge" />
+<img src="https://img.shields.io/badge/MOUNT%20PATH-/app/data-7C4DFF?style=for-the-badge" /></div>«💡 نکته مهم: اتصال Volume به‌تنهایی کافی نیست. برنامه نیز باید اطلاعات موردنظر را در "/app/data" ذخیره کند. اگر پایگاه داده یا فایل‌های پنل در مسیر دیگری باشند، باید تنظیمات برنامه متناسب با آن اصلاح شوند.»
 
 ---
 
-<img src="https://img.shields.io/badge/04-DOMAIN%20GENERATOR-7C4DFF?style=for-the-badge" />
+<div align="center">"04" — DOMAIN GENERATOR
 
-🌐 ساخت دامنه اختصاصی پنل
+🌐 ساخت دامنه عمومی پنل
 
-پس از آنلاین‌شدن سرویس، دامنه عمومی آن را تنظیم کنید.
+</div>پس از استقرار پروژه، باید یک دامنه عمومی برای دسترسی به پنل ایجاد کنید.
 
-1. وارد بخش تنظیمات سرویس در Railway شوید.
-2. بخش Networking یا Public Networking را باز کنید.
-3. از قسمت تولید دامنه، یک دامنه عمومی ایجاد کنید.
-4. پورت عمومی سرویس را روی مقدار زیر قرار دهید:
+مراحل انجام کار:
+
+1. وارد پروژه خود در Railway شوید.
+2. سرویس اصلی پنل را باز کنید.
+3. وارد بخش Settings → Networking یا بخش مربوط به دامنه‌های عمومی شوید.
+4. گزینه تولید دامنه عمومی را انتخاب کنید.
+5. پورت عمومی را با توجه به تنظیمات واقعی سرویس روی مقدار زیر قرار دهید:
 
 8080
 
-5. پس از فعال‌شدن دامنه، آدرس نهایی را بررسی کنید.
+6. دامنه ایجادشده را کپی کنید.
+7. منتظر بمانید تا دامنه فعال شود و سرویس پاسخ دهد.
 
-🔗 آدرس مسیر پنل:
+🔗 آدرس ورود به پنل:
 
-https://<دامنه‌ی پنل اصلی>/x7m2qp9z
+مسیر زیر را با دامنه واقعی خود ترکیب کنید:
 
-به‌جای "<دامنه‌ی پنل اصلی>"، دامنه واقعی سرویس خود را وارد کنید.
+https://YOUR-DOMAIN/x7m2qp9z
 
-مثال ساختاری:
+به‌جای "YOUR-DOMAIN"، دامنه واقعی Railway خود را قرار دهید.
 
-https://your-panel-domain.example/x7m2qp9z
+مثال نمایشی:
 
-«⚠️ مهم: پورت "8080" باید با پورت عمومی تنظیم‌شده در سرویس و تنظیمات برنامه سازگار باشد. اگر برنامه از قبل با تنظیمات دیگری اجرا می‌شود، بدون بررسی پیکربندی آن را تغییر ندهید. مسیر "/x7m2qp9z" نیز باید در برنامه یا پراکسی تعریف شده باشد.»
+https://your-panel.example.com/x7m2qp9z
+
+«⚠️ توجه: آدرس بالا صرفاً نمونه است. دامنه نمونه را باز نکنید؛ دامنه واقعی سرویس خودتان را جایگزین کنید. مسیر "/x7m2qp9z" نیز باید در برنامه یا پراکسی تعریف شده باشد.»
+
+<div align="center"><img src="https://img.shields.io/badge/NETWORK-PUBLIC-00E5FF?style=for-the-badge" />
+<img src="https://img.shields.io/badge/PORT-8080-7C4DFF?style=for-the-badge" />
+<img src="https://img.shields.io/badge/PROTOCOL-HTTPS-00E5FF?style=for-the-badge" /></div>🔧 اگر دامنه باز نشد:
+
+- وضعیت Deploy را بررسی کنید.
+- لاگ‌های سرویس را برای خطاهای زمان اجرا بررسی کنید.
+- مطمئن شوید پورت عمومی و پورت مورد انتظار برنامه با تنظیمات پراکسی هماهنگ هستند.
+- بررسی کنید گواهی HTTPS فعال شده باشد.
+- مطمئن شوید مسیر پنل در برنامه وجود دارد.
 
 ---
 
-<img src="https://img.shields.io/badge/05-ADMIN%20ACCESS-00E5FF?style=for-the-badge" />
+<div align="center">"05" — ADMIN ACCESS
 
-🔐 ورود به پنل مدیریت
+🔐 ورود امن به پنل مدیریت
 
-پس از آماده‌شدن دامنه:
+</div>پس از فعال شدن دامنه، آدرس پنل را در مرورگر باز کنید.
 
-1. آدرس پنل را در مرورگر باز کنید.
-2. تا نمایش صفحه ورود منتظر بمانید.
-3. با اطلاعات ورود اولیه‌ای که برنامه تعریف کرده است، وارد شوید.
+مراحل ورود:
 
-در صورتی که نسخه پروژه از اطلاعات ورود پیش‌فرض زیر استفاده می‌کند:
+1. آدرس پنل را با مسیر تعیین‌شده باز کنید.
+2. صفحه ورود را بررسی کنید.
+3. نام کاربری و رمز عبوری را وارد کنید که برای نسخه نصب‌شده تعریف شده است.
+4. پس از ورود، تنظیمات امنیتی حساب مدیر را بررسی کنید.
+
+اگر پروژه واقعاً از اطلاعات ورود اولیه زیر استفاده می‌کند، می‌توانید از آن‌ها برای ورود اولیه استفاده کنید:
 
 Username: admin
 Password: admin
 
-از آن فقط برای ورود اولیه استفاده کنید و پیش از استفاده عمومی، رمز عبور را به یک رمز قوی و منحصربه‌فرد تغییر دهید.
+🛡️ هشدار امنیتی:
 
-«🛡️ اگر پروژه رمز اولیه متفاوتی دارد، از اطلاعات تعریف‌شده در تنظیمات یا مستندات همان نسخه استفاده کنید؛ نام کاربری و رمز بالا برای همه پروژه‌ها یکسان نیستند.»
+- اطلاعات بالا برای همه نسخه‌های پروژه معتبر نیست.
+- اگر ورود انجام نشد، اطلاعات تعریف‌شده در کد یا تنظیمات پروژه را بررسی کنید.
+- در صورت استفاده از رمز اولیه، آن را فوراً با رمز قوی و منحصربه‌فرد جایگزین کنید.
+- رمز مدیر را در README عمومی، پیام‌های مشتریان یا فایل‌های قابل‌مشاهده منتشر نکنید.
 
----
+<div align="center"><img src="https://img.shields.io/badge/ACCESS-ADMIN-7C4DFF?style=for-the-badge" />
+<img src="https://img.shields.io/badge/SECURITY-PASSWORD%20PROTECTED-00E5FF?style=for-the-badge" /></div>---
 
-<img src="https://img.shields.io/badge/06-CONFIGURATION-7C4DFF?style=for-the-badge" />
+<div align="center">"06" — CONFIGURATION
 
 ⚙️ ساخت کانفیگ جدید
 
-پس از ورود موفق به پنل مدیریت:
+</div>پس از ورود موفق به پنل مدیریت، می‌توانید کانفیگ جدید ایجاد کنید.
 
-1. به بخش ساخت کانفیگ یا مدیریت کاربران بروید.
-2. گزینه ایجاد کانفیگ جدید را انتخاب کنید.
-3. نام کاربر یا کانفیگ را وارد کنید.
-4. حجم، مدت اعتبار و سایر تنظیمات موردنیاز را تعیین کنید.
-5. تنظیمات را بررسی و کانفیگ را ایجاد کنید.
-6. وضعیت کانفیگ و امکان اتصال آن را بررسی کنید.
+مراحل ساخت کانفیگ:
 
-<div align="center"><img src="https://img.shields.io/badge/CREATE-CONFIG-00E5FF?style=for-the-badge" />
-<img src="https://img.shields.io/badge/CONTROL-ADMIN%20ONLY-7C4DFF?style=for-the-badge" /></div>«💎 مقادیر قابل‌تنظیم به امکانات واقعی نسخه نصب‌شده بستگی دارند.»
+1. وارد بخش مدیریت کاربران یا ساخت کانفیگ شوید.
+2. گزینه ایجاد مورد جدید را انتخاب کنید.
+3. نام یا شناسه کاربر را وارد کنید.
+4. حجم مجاز را تعیین کنید.
+5. مدت اعتبار را مشخص کنید.
+6. تنظیمات اتصال موردنیاز پروژه را بررسی کنید.
+7. کانفیگ را ایجاد و اطلاعات آن را ذخیره کنید.
+8. وضعیت کانفیگ، حجم و تاریخ انقضا را بررسی کنید.
+
+<div align="center"><img src="https://img.shields.io/badge/CONFIG-CREATE-00E5FF?style=for-the-badge" />
+<img src="https://img.shields.io/badge/QUOTA-CONTROLLED-7C4DFF?style=for-the-badge" />
+<img src="https://img.shields.io/badge/EXPIRY-CONFIGURABLE-00E5FF?style=for-the-badge" /></div>«💎 نکته: گزینه‌ها و تنظیمات قابل‌دسترسی به قابلیت‌های واقعی پنل شما بستگی دارند. اگر نسخه پروژه از لینک اشتراک پشتیبانی می‌کند، پس از ایجاد کانفیگ، لینک مربوط به همان کاربر را از پنل دریافت کنید.»
 
 ---
 
-<img src="https://img.shields.io/badge/07-READY%20TO%20CONNECT-00E5FF?style=for-the-badge" />
+<div align="center">"07" — READY TO CONNECT
 
 🚀 بررسی نهایی و تحویل به مشتری
 
-پیش از تحویل کانفیگ، موارد زیر را بررسی کنید:
+</div>پیش از ارسال کانفیگ برای مشتری، مراحل زیر را بررسی کنید:
 
-- سرویس پنل آنلاین باشد.
-- دامنه با HTTPS باز شود.
-- اطلاعات پنل پس از Restart باقی بمانند.
-- کانفیگ ساخته‌شده معتبر باشد.
-- حجم و مدت اعتبار درست تنظیم شده باشند.
-- اتصال کانفیگ در کلاینت موردنظر آزمایش شده باشد.
+- [ ] سرویس Railway در وضعیت Running باشد.
+- [ ] دامنه عمومی به‌درستی باز شود.
+- [ ] اتصال HTTPS فعال باشد.
+- [ ] Volume به سرویس درست متصل شده باشد.
+- [ ] اطلاعات ضروری پس از Restart باقی بمانند.
+- [ ] کانفیگ در پنل با موفقیت ایجاد شده باشد.
+- [ ] حجم و مدت اعتبار صحیح باشند.
+- [ ] اتصال کانفیگ با کلاینت سازگار آزمایش شده باشد.
+- [ ] لینک اشتراک متعلق به کاربر صحیح باشد.
 
-پس از تأیید نهایی، لینک اشتراک یا اطلاعات اتصال را از طریق روش امن در اختیار مشتری قرار دهید.
+📦 تحویل کانفیگ:
 
-<div align="center"><img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=800&size=22&duration=1800&pause=500&color=00E5FF&center=true&vCenter=true&width=650&height=50&lines=SPEED+NET+IS+READY;YOUR+PANEL.+YOUR+CONTROL.;NEXT+GENERATION+CONNECTION" alt="SPEED NET Ready" /><img src="https://img.shields.io/badge/SPEED%20NET-DEPLOYED-00E5FF?style=for-the-badge" />
-<img src="https://img.shields.io/badge/STATUS-READY-7C4DFF?style=for-the-badge" />"⚡ POWERED BY SPEED NET ⚡"
+پس از بررسی موارد بالا، لینک اشتراک یا اطلاعات اتصال را از طریق روش مناسب و امن در اختیار مشتری قرار دهید.
+
+اطلاعات ورود مدیر، کلیدهای خصوصی و تنظیمات محرمانه سرور را همراه کانفیگ مشتری ارسال نکنید.
+
+---
+
+<div align="center"><img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=800&size=24&duration=1800&pause=500&color=00E5FF&center=true&vCenter=true&width=650&height=55&lines=SPEED+NET+IS+READY;DEPLOYED+%E2%80%A2+CONFIGURED+%E2%80%A2+CONNECTED;YOUR+PANEL.+YOUR+CONTROL." alt="SPEED NET Deployment Complete" /><br><img src="https://img.shields.io/badge/SPEED%20NET-ULTIMATE%20EDITION-080B18?style=for-the-badge&logo=lightning&logoColor=00E5FF" />
+<img src="https://img.shields.io/badge/DEPLOYMENT-RAILWAY-171923?style=for-the-badge&logo=railway&logoColor=FFFFFF" />
+<img src="https://img.shields.io/badge/STATUS-READY%20TO%20CONNECT-00E5FF?style=for-the-badge" /><br><br>
+
+"⚡ POWERED BY SPEED NET ⚡"
 
 Deploy smarter. Configure faster. Stay in control.
 
