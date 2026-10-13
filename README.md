@@ -1,4 +1,3 @@
----
 
 <div align="center"><img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=170&color=0:050816,50:17104A,100:00E5FF&text=SPEED%20NET&fontColor=FFFFFF&fontSize=48&fontAlignY=40&desc=SYSTEM%20CONFIGURATION&descSize=15&descAlignY=62&animation=twinkling" alt="SPEED NET System Configuration" /><br><img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=800&size=20&duration=1800&pause=500&color=00E5FF&center=true&vCenter=true&width=650&height=45&lines=03+%E2%80%A2+PERSISTENT+STORAGE;04+%E2%80%A2+DOMAIN+GENERATOR;05+%E2%80%A2+ADMIN+ACCESS;06+%E2%80%A2+CREATE+CONFIG;07+%E2%80%A2+READY+TO+CONNECT" alt="Animated Setup Steps" /><br><img src="https://img.shields.io/badge/03-STORAGE-00E5FF?style=for-the-badge" />
 <img src="https://img.shields.io/badge/04-DOMAIN-7C4DFF?style=for-the-badge" />
